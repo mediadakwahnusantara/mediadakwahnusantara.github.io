@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+  <head>
+    <!-- Meta tags  -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta name="referrer" content="same-origin">
+          
+<!-- Mendeklarasikan warna yang muncul pada address bar Chrome versi seluler -->
+<meta name="theme-color" content="#000" />
+<!-- Mendeklarasikan ikon untuk iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Soku TV" />
+<!-- Mendeklarasikan ikon untuk Windows -->
+<meta name="msapplication-TileColor" content="#000" />
+            
+    
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">  
+    
+<link href="https://cdn.jsdelivr.net/gh/habotv/cdn@master/jwstylesin.css" rel="stylesheet" integrity="" crossorigin="anonymous">  
+    
+ <script src="//content.jwplatform.com/libraries/SAHhwvZq.js" type="text/javascript"></script>
+<script> jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';</script>
+	   
+    
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/BerkasKita/Font-Awesome-Pro-6.2.1@main/css/all.min.css"> 
+    
+<script src="https://cdn.jsdelivr.net/gh/minozotv/rakettv@master/capto.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/minozotv/rakettv@master/captos.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/minozotv/rakettv@master/capcur.js"></script>      
+    
+<style>
+html{scroll-behavior:smooth;height:100%;overflow:auto
+font-family:sans-serif;}body,html{height:100%;position:relative;}
+body{margin:0;font-family:Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:.94rem;font-weight:400;line-height:1.5;color:#aaa;text-align:left;background-color:#000;}
+*::-webkit-scrollbar { 
+    display: true;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+.doctor-profile-tabs button{padding-bottom:6px;padding-top:6px}  
+  
+.bungkus {
+  display: grid;
+  padding: 5px 15px;
+  border-radius: 10px;
+  margin: auto;
+  /* margin: 0 40px 40px; */
+  grid-gap: 12px;
+  grid-template-columns: repeat(5, 1fr);
+}
+  
+.bungkus img {
+  width: 100%;
+  margin-bottom: 5px;
+  background: #fff;
+  border-radius: 10px;
+  outline: 3px solid #fff;
+  transition: 0.2 ease-in-out;
+  opacity: 1;
+}
+  
+.bungkus img:hover {
+  opacity: 0.75;
+  border-radius: 10px;
+  outline: 0px solid #fff;
+}
+
+.vl {position:absolute;border-right:1px solid #222;height:50px;top:15px;right:100px;}
+.ch {text-align:right;color:#fff;float:right;margin-right:20px;}
+.live {font-weight:bold;text-transform:uppercase;font-size:10px;margin-top:2px;text-align:right;color:#fff;float:right;margin-right:20px;border-radius:50px;background:linear-gradient(135deg, rgba(39,88,65,1) 1%, rgba(8,27,21,1) 100%);padding:0px 7px 0;}
+.game-itme {position:relative;margin-bottom:5px;}
+.time-is-captitle2 {margin-bottom:0px;}
+.navi {background:#000;height:50px;position:fixed;width:100%;bottom:0px;z-index:10;}
+  
+@media screen and (min-width: 576px) {
+  .navi {display:none;}
+}
+  
+@media screen and (max-width: 576px) {
+  
+}
+  
+.offcanvas{--bs-offcanvas-width: 400px;
+	--bs-offcanvas-height: 50vh;
+	--bs-offcanvas-padding-x: 1rem;
+	--bs-offcanvas-padding-y: 1rem;
+	--bs-offcanvas-color: #fff;
+	--bs-offcanvas-bg: #000;
+	--bs-offcanvas-border-width: 2px;
+	--bs-offcanvas-border-color: #fff;
+	--bs-offcanvas-box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.5);
+  border-top-left-radius:0rem;
+  border-top-right-radius:0rem  
+  }
+ 
+.btn-close{
+  background-color: #fff; 
+  background-image: rgb(255, 255, 255);
+  }
+.offcanvas-header {
+ border-bottom: 2px solid white;
+ padding-top: 10px;
+ padding-bottom: 10px}
+.offcanvas-body{
+  padding:5px;}
+ 
+
+.choose-color-radio .custom-control-label::before {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 0;
+  background-color: #100DD1; }
+
+.choose-color-radio .custom-control-label.yellow::before {
+  background-color: #ffaf00; }
+
+.choose-color-radio .custom-control-label.green::before {
+  background-color: #00b894; }
+
+.choose-color-radio .custom-control-label.purple::before {
+  background-color: #ea4c62; }
+
+.choose-color-radio .custom-control-label::after {
+  width: 1.25rem;
+  height: 1.25rem; }
+
+.choose-color-radio .custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: none;
+  border-color: transparent; }
+
+.choose-color-radio .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #100DD1;
+  background-color: #100DD1; }
+
+.choose-color-radio .custom-control-input:checked ~ .custom-control-label.yellow::before {
+  background-color: #ffaf00; }
+
+.choose-color-radio .custom-control-input:checked ~ .custom-control-label.green::before {
+  background-color: #00b894; }
+
+.choose-color-radio .custom-control-input:checked ~ .custom-control-label.purple::before {
+  background-color: #ea4c62; }
+
+.choose-size-radio {
+  position: relative;
+  z-index: 1;
+  text-align: center; }
+  .choose-size-radio li a {
+    width: 75px;
+    height: 30px;
+    background-color: #ffffff;
+    text-align: center;
+    margin-left: 0.4rem;
+    border-radius: .25rem;
+    margin-top: 15px;
+    margin-bottom: -10px;
+    font-size: 13px;
+    font-weight:500;
+    line-height: 30px;
+    color: #000;
+    display: block;
+    box-shadow: 0 1px 2px 0 rgba(15, 15, 15, 0.175); }
+    .choose-size-radio li a:hover, .choose-size-radio li a:focus {
+      color: #ffffff;
+      background-color: #ea4c62; }
+  .choose-size-radio li.active a {
+    color: #ffffff;
+    background-color: #ea4c62; }
+  .choose-size-radio {
+  position: relative;
+  z-index: 1;
+  text-align: center; }
+  
+  .choose-size-radios li a {
+    width: 45px;
+    height: 25px;
+    background-color: #ffffff;
+    text-align: center;
+    margin-left: 0.4rem;
+    border-radius: .25rem;
+    margin-top: 15px;
+    margin-bottom: -10px;
+    font-size: 13px;
+    font-weight:500;
+    line-height: 24px;
+    color: #000;
+    display: block;
+    box-shadow: 0 1px 2px 0 rgba(15, 15, 15, 0.175); }
+    .choose-size-radios li a:hover, .choose-size-radio li a:focus {
+      color: #ffffff;
+      background-color: #ea4c62; }
+  .choose-size-radios li.active a {
+    color: #ffffff;
+    background-color: #ea4c62; }
+  ul {
+  margin: 0; }
+  ul li {
+    list-style: none;
+    text-decoration: none; }
+    ul li:hover, ul li:focus {
+      list-style: none;
+      text-decoration: none; }
+  hr.sk1 {
+  border-bottom: 3px solid #ffffff; }
+
+  .Marquee-box {
+     position: relative;
+     display: inline-block;
+     width: 100%;
+     height: 30px;
+  }
+  .MyMarquee {
+     text-align: center;
+     font-weight: bold;
+     width: 100%;
+     height: 100%;
+     font-size: 12px;
+     border-bottom: 3px solid #000;
+     color: #FFFFFF;
+     font-family: Arial, Helvetica, sans-serif;
+     vertical-align: middle;
+     -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+             box-sizing: border-box;
+     background-color: #111;
+
+  }
+  .MyMarquee div {
+     display: inline-block;
+     vertical-align: middle;
+  }
+  .MyMarquee a, .MyMarquee img {
+     display: inline-block;
+     text-decoration: underline;
+     color: #FFFFFF;
+     vertical-align: middle;
+  }  
+    </style>
+    
+<script type="text/javascript">
+        function $(id){
+    return document.getElementById(id);
+}
+function dw(str){
+    document.write(str);
+}
+function J_get(name, url)
+{
+    url  = url?url:self.window.document.location.href;
+    var start   = url.indexOf(name + '=');
+    if (start == -1) return '';
+    var len = start + name.length + 1;
+    var end = url.indexOf('######',len);
+    if (end == -1) end = url.length;
+    return unescape(url.substring(len,end));
+}
+//-->
+
+                id = J_get('id'); 
+                
+var gid = encodeURIComponent(id);
+</script>
+<script src="https://cdn.jsdelivr.net/gh/habotv/extra@master/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/habotv/extra@master/jquery-migrate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/habotv/extra@master/jquery.cookie.js"></script>    
+
+</head><body>   
+
+  <div style="clear:both;"></div>    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #player {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0
+        }
+    </style>
+
+<script src="https://cdn.jsdelivr.net/gh/mumunin/fine@main/jwconet.js"></script>    
+
+<div id="player"></div>
+
+<script src="https://cdn.jsdelivr.net/gh/mumunin/fine@main/jwmps.js"></script>    <div style="clear:both; padding-bottom:0.25em"></div>  
+
+<script>    
+(function ($) {
+    // 3.0 Size Selection
+    $(".choose-size-radio li").on("click", function () {
+        $(".choose-size-radio li").removeClass("active");
+        $(this).addClass("active");
+    }); 
+ })(jQuery);
+(function ($) {
+    // 3.0 Size Selection
+    $(".choose-size-radios li").on("click", function () {
+        $(".choose-size-radios li").removeClass("active");
+        $(this).addClass("active");
+    }); 
+ })(jQuery);  
+</script>  
+    
+ 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/habotv/files@master/main.js"></script>    
+<script src="https://cdn.jsdelivr.net/gh/habotv/mokutv@master/loading.js"></script>    
+<script src="https://cdn.jsdelivr.net/gh/mumunin/fine@main/duzn.js"></script>    
+<script src="https://cdn.jsdelivr.net/gh/mumunin/fine@main/dstp.js"></script>    
+<script src="https://cdn.jsdelivr.net/gh/mumunin/fine@main/agt.js"></script>    
+<script src="https://cdn.jsdelivr.net/gh/mumunin/fine@main/lutis.js"></script>    
+    
+</body></html>
