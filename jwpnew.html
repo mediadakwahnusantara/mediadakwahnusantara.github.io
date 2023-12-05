@@ -54,7 +54,7 @@ playerInstance.setup({
     width: "100%",
     height: "100%",
     aspectratio: "",
-    autostart: true,
+    autostart: false,
     cast: {},
     sharing: {}
 });
@@ -62,13 +62,13 @@ playerInstance.setup({
 
 <!-- ads-->
 
-<script type='text/javascript' src='//pl14330559.toprevenuegate.com/ac/58/bb/ac58bbe800329453de3d4b2f28050b55.js'></script>
+<!--<script type='text/javascript' src='//pl14330559.toprevenuegate.com/ac/58/bb/ac58bbe800329453de3d4b2f28050b55.js'></script>-->
 
 <!-- ads-->
 
 <!-- adcash-->
 
-<script src="//acdcdn.com/script/suv4.js" data-adel="lwsu" cdnd="acdcdn.com" zid="4681243"></script>
+<!--<script src="//acdcdn.com/script/suv4.js" data-adel="lwsu" cdnd="acdcdn.com" zid="4681243"></script>-->
 
 <!-- adcash-->
 
@@ -86,14 +86,39 @@ hs.src = ('//s10.histats.com/js15_as.js');
 <!-- Histats.com  END  -->
 
 
-<!--contador-->
-<script id="_wau325">var _wau = _wau || []; _wau.push(["tab", "zih6jfsg50", "325", ""]);</script><script async src="//waust.at/t.js"></script>
-<!--contador-->
 
-
-
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/17.8.4/lazyload.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/devtools-detector/2.0.14/devtools-detector.min.js"></script>
+<script>
+    var myLazyLoad = new LazyLoad();
+    myLazyLoad.update();
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register('//gdplayertv.top/sw.js').then(function(res) {
+            console.log("service worker registered")
+        }).catch(function(err) {
+            console.log("service worker not registered", err)
+        })
+    }
+            document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        $(document).on("keyup keydown keypress", function(e) {
+            if (e.altKey || e.ctrlKey || e.shiftKey) {
+                return false;
+            }
+        });
+        devtoolsDetector.addListener(function(isOpen) {
+            if (isOpen) {
+                console.clear();
+                if ("" !== '') {
+                    window.location.replace("");
+                } else {
+                    window.location.replace("https://google.com");
+                }
+            }
+        });
+        devtoolsDetector.launch();
+    </script>
 
 
 </html>
