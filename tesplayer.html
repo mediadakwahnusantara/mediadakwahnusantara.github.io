@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shaka Player HLS with Referer Checking</title>
+    <title>Shaka Player HLS with Referer and User Agent Checking</title>
 
     <!-- Shaka Player CSS -->
     <link rel="stylesheet" href="https://unpkg.com/shaka-player@4.7.1/dist/controls.css" />
 
     <!-- Shaka Player JavaScript -->
     <script src="https://unpkg.com/shaka-player@4.7.1/dist/shaka-player.compiled.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.7.1/dist/shaka-player.compiled.min.js"></script>
+    
     <style>
         /* Membuat video player responsif menggunakan media queries */
         #shaka-player-container {
             width: 100%;
             height: 100%;
-            max-width: 800px; /* Ukuran maksimal untuk konten */
+            max-width: 100%; /* Ukuran maksimal untuk konten */
             margin: 0 auto; /* Pusatkan konten di tengah */
         }
 
@@ -65,15 +67,24 @@
         // Mendefinisikan URL video HLS
         var manifestUri = ""+ id +""; // Ganti dengan URL video HLS Anda
 
-        // Memeriksa header referer sebelum memuat video
+        // Mendapatkan User Agent
+        var userAgent = navigator.userAgent;
+
+        // Memeriksa header referer dan User Agent sebelum memuat video
         var referer = document.referrer;
-        if (isValidReferer(referer)) {
+        if (isValidReferer(referer) && isValidUserAgent(userAgent)) {
             // Memuat dan memainkan video dengan autoplay
             player.load(manifestUri, /* autoplay */ true).then(function() {
                 console.log('Video berhasil dimuat!');
+
+                // Menonaktifkan AdaptationRate untuk pengaturan resolusi video
+                player.configure({abr: {enabled: false}});
+                
+                // Mengatur bitrate awal untuk pengaturan kualitas video
+                player.configure({abr: {preferredInitialBandwidthKbps: 5000}});
             }).catch(onError);
         } else {
-            console.error('Referer tidak valid. Akses ditolak.');
+            console.error('Referer atau User Agent tidak valid. Akses ditolak.');
         }
 
         // Fungsi untuk memeriksa apakah referer valid
@@ -84,11 +95,31 @@
             return true;
         }
 
+        // Fungsi untuk memeriksa apakah User Agent valid
+        function isValidUserAgent(userAgent) {
+            // Ganti dengan logika validasi User Agent Anda
+            // Misalnya, Anda dapat memeriksa apakah User Agent sesuai dengan yang diharapkan
+            // Contoh sederhana: return userAgent.includes('Mozilla');
+            return true;
+        }
+
         // Menangani kesalahan
         function onError(event) {
             console.error('Error code', event.detail.code, 'object', event.detail.data);
         }
+        
+        // Attach player and ui to the window to make it easy to access in the JS console.
+            window.player = player;
+            window.ui = ui;
+            
+        // Listen to the custom shaka-ui-load-failed event, in case Shaka Player fails
+        // to load (e.g. due to lack of browser support).
+        document.addEventListener('shaka-ui-load-failed', initFailed);    
     </script>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
