@@ -24,6 +24,20 @@
             margin: 0 auto;
             /* Pusatkan konten di tengah */
         }
+        
+        #quality-select {
+            margin-top: 10px;
+            max-width: 300px;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+            font-size: 14px;
+            outline: none;
+        }
     </style>
 
     <script type="text/javascript">
@@ -57,6 +71,11 @@
 
     <!-- Container untuk pemutar Shaka Player -->
     <video id="shaka-player-container" controls></video>
+    
+    <!-- Elemen untuk memilih kualitas video -->
+    <div>
+        <select id="quality-select"></select>
+    </div>
 
     <script>
         var id = J_get('id');
@@ -110,6 +129,25 @@
             // Contoh sederhana: return userAgent.includes('Mozilla');
             return true;
         }
+        
+        // Mendapatkan daftar kualitas yang tersedia
+            var tracks = player.getVariantTracks();
+
+            // Menambahkan pilihan kualitas video ke dalam elemen <select>
+            var qualitySelect = document.getElementById('quality-select');
+            tracks.forEach(function(track) {
+                var option = document.createElement('option');
+                option.value = track.id;
+                option.text = track.height + 'p';
+                qualitySelect.appendChild(option);
+            });
+
+            // Mendeteksi perubahan pilihan kualitas dan mengatur kualitas video
+            qualitySelect.addEventListener('change', function() {
+                var selectedQuality = qualitySelect.value;
+                player.selectVariantTrack(parseInt(selectedQuality, 10), true);
+            });
+        }).catch(onError);
 
         // Menangani kesalahan
         function onError(event) {
