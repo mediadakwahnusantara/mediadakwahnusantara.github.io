@@ -48,6 +48,32 @@
             color: #fff;
         }
     </style>
+    
+    <script type="text/javascript">
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        function dw(str) {
+            document.write(str);
+        }
+
+        function J_get(name, manifestUri) {
+            manifestUri = manifestUri ? manifestUri : self.window.document.location.href;
+            var start = manifestUri.indexOf(name + '=');
+            if (start == -1) return '';
+            var len = start + name.length + 1;
+            var end = manifestUri.indexOf('######', len);
+            if (end == -1) end = manifestUri.length;
+            return unescape(manifestUri.substring(len, end));
+        }
+        //-->
+
+        id = J_get('id');
+
+        var gid = encodeURIComponent(id);
+    </script>
+    
 </head>
 <body>
 
