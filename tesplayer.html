@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shaka Player HLS with Referer and User Agent Checking</title>
+    <title>Shaka Player HLS with Quality Switching</title>
 
     <!-- Shaka Player CSS -->
     <link rel="stylesheet" href="https://unpkg.com/shaka-player@4.7.1/dist/controls.css" />
 
     <!-- Shaka Player JavaScript -->
     <script src="https://unpkg.com/shaka-player@4.7.1/dist/shaka-player.compiled.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.7.1/dist/shaka-player.compiled.min.js"></script>
 
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
         /* Membuat video player responsif menggunakan media queries */
         #shaka-player-container {
             width: 100%;
@@ -38,47 +43,25 @@
             font-size: 14px;
             outline: none;
         }
+        #quality-select option {
+            background-color: #555;
+            color: #fff;
+        }
     </style>
-
-    <script type="text/javascript">
-        function $(id) {
-            return document.getElementById(id);
-        }
-
-        function dw(str) {
-            document.write(str);
-        }
-
-        function J_get(name, manifestUri) {
-            manifestUri = manifestUri ? manifestUri : self.window.document.location.href;
-            var start = manifestUri.indexOf(name + '=');
-            if (start == -1) return '';
-            var len = start + name.length + 1;
-            var end = manifestUri.indexOf('######', len);
-            if (end == -1) end = manifestUri.length;
-            return unescape(manifestUri.substring(len, end));
-        }
-        //-->
-
-        id = J_get('id');
-
-        var gid = encodeURIComponent(id);
-    </script>
-
 </head>
-
 <body>
 
     <!-- Container untuk pemutar Shaka Player -->
-    <video id="shaka-player-container" controls></video>
-    
+    <div id="video-container">
+        <video id="shaka-player-container" controls></video>
+    </div>
+
     <!-- Elemen untuk memilih kualitas video -->
     <div>
         <select id="quality-select"></select>
     </div>
 
     <script>
-        var id = J_get('id');
         // Membuat instance Shaka Player
         var videoElement = document.getElementById('shaka-player-container');
         var player = new shaka.Player(videoElement);
@@ -86,51 +69,11 @@
         // Mendefinisikan URL video HLS
         var manifestUri = "" + id + ""; // Ganti dengan URL video HLS Anda
 
-        // Mendapatkan User Agent
-        var userAgent = navigator.userAgent;
-
-        // Memeriksa header referer dan User Agent sebelum memuat video
-        var referer = document.referrer;
-        if (isValidReferer(referer) && isValidUserAgent(userAgent)) {
-            // Memuat dan memainkan video dengan autoplay
-            player.load(manifestUri, /* autoplay */ true).then(function() {
-                console.log('Video berhasil dimuat!');
-
-                // Menonaktifkan AdaptationRate untuk pengaturan resolusi video
-                player.configure({
-                    abr: {
-                        enabled: false
-                    }
-                });
-
-                // Mengatur bitrate awal untuk pengaturan kualitas video
-                player.configure({
-                    abr: {
-                        preferredInitialBandwidthKbps: 5000
-                    }
-                });
-            }).catch(onError);
-        } else {
-            console.error('Referer atau User Agent tidak valid. Akses ditolak.');
-        }
-
-        // Fungsi untuk memeriksa apakah referer valid
-        function isValidReferer(referer) {
-            // Ganti dengan logika validasi referer Anda
-            // Misalnya, Anda dapat memeriksa apakah referer sesuai dengan domain yang diizinkan
-            // Contoh sederhana: return referer.includes('example.com');
-            return true;
-        }
-
-        // Fungsi untuk memeriksa apakah User Agent valid
-        function isValidUserAgent(userAgent) {
-            // Ganti dengan logika validasi User Agent Anda
-            // Misalnya, Anda dapat memeriksa apakah User Agent sesuai dengan yang diharapkan
-            // Contoh sederhana: return userAgent.includes('Mozilla');
-            return true;
-        }
-        
-        // Mendapatkan daftar kualitas yang tersedia
+        // Memuat dan memainkan video dengan autoplay
+        player.load(manifestUri, /* autoplay */ true).then(function() {
+            console.log('Video berhasil dimuat!');
+            
+            // Mendapatkan daftar kualitas yang tersedia
             var tracks = player.getVariantTracks();
 
             // Menambahkan pilihan kualitas video ke dalam elemen <select>
@@ -154,6 +97,6 @@
             console.error('Error code', event.detail.code, 'object', event.detail.data);
         }
     </script>
-</body>
 
+</body>
 </html>
