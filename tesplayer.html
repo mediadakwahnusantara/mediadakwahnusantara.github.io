@@ -20,14 +20,14 @@
             document.write(str);
         }
 
-        function J_get(name, url) {
-            url = url ? url : self.window.document.location.href;
-            var start = url.indexOf(name + '=');
+        function J_get(name, source) {
+            source = source ? source : self.window.document.location.href;
+            var start = source.indexOf(name + '=');
             if (start == -1) return '';
             var len = start + name.length + 1;
-            var end = url.indexOf('######', len);
-            if (end == -1) end = url.length;
-            return unescape(url.substring(len, end));
+            var end = source.indexOf('######', len);
+            if (end == -1) end = source.length;
+            return unescape(source.substring(len, end));
         }
         //-->
 
