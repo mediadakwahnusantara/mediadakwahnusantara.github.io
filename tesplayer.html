@@ -3,13 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="IE=edge" >
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta name="referrer" content="same-origin">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 <title>Aliplayer Online Settings</title>
 <link rel="stylesheet" href="https://g.alicdn.com/apsara-media-box/imp-web-player/2.19.0/skins/default/aliplayer-min.css" />
 <script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/apsara-media-box/imp-web-player/2.19.0/aliplayer-min.js"></script>
-
-<title>Ali-Player</title> <!-- Only support for "https" (http not valid) -->
 
 <script type="text/javascript">
         function $(id) {
@@ -36,174 +33,28 @@
         var gid = encodeURIComponent(id);
     </script>
 
-<style>
-/* Body style */
-body {background: #000;
-margin: 0;
-padding: 0;
-text-align: center;}
-/* Big play button */
-.prism-player .prism-big-play-btn
-{background:url(https://cdn-icons-png.flaticon.com/128/6878/6878705.png) no-repeat;
-background-size:contain;
-width:64px;height:64px}
-.prism-player .prism-big-play-btn .outter
-{border:7px solid rgba(255,255,255,.51);
-width:64px;
-height:64px;
-border-radius:100%;
-position:absolute;
-box-sizing:border-box;
-top:0;left:0;right:0;bottom:0}
-.prism-player .prism-big-play-btn:hover
-{cursor:pointer}
-.prism-player .prism-play-btn
-{width:26px;height:26px;
-background:url(https://i.imgur.com/jZAsKan.png) no-repeat;
-background-size:contain}
-.prism-player .prism-play-btn:hover
-{cursor:pointer}
-.prism-player .prism-play-btn.playing
-{background:url(https://i.imgur.com/mhoR821.png) no-repeat;
-background-size:contain}
-.prism-player .prism-play-btn.playing:hover
-{cursor:pointer}
-/* Volume control */
-.prism-player .prism-volume-control 
-{left: auto !important;
-right: 125px;}
-.prism-player .prism-volume .volume-icon .long-horizontal
-{width:3px;
-height:18px;
-position:absolute;
-right:5px;
-top:50%;
--ms-transform:translateY(-50%);
-transform:translateY(-50%)}
-.prism-player .prism-volume .volume-icon .short-horizontal
-{width:3px;
-height:9px;
-position:absolute;
-right:9px;
-top:50%;
--ms-transform:translateY(-50%);
-transform:translateY(-50%)}
-.prism-player .prism-volume .volume-icon:hover
-{-ms-transform-origin:0 50%;
-transform-origin:0 50%;
-background-size:contain;
-cursor:pointer}
-.prism-player .prism-volume .mute .long-horizontal
-{-ms-transform:rotate(-45deg);
-transform:rotate(-45deg);
-background: #F44336;
-height:17px;
-top:10px;
-left:22.5px;}
-.prism-player .prism-volume .mute .short-horizontal
-{-ms-transform:rotate(45deg);
-transform:rotate(45deg);
-background: #F44336;
-height:17px;
-top:10px;
-left:22.5px;}
-/* Fullscreen */
-.prism-player .prism-fullscreen-btn 
-{margin-top: 15px !important;
-width: 24px;
-height: 24px;}
-/* Thumbnail */
-.prism-player .prism-thumbnail 
-{border: none;}
-/* Player button */
-.prism-player .prism-play-btn 
-{width: 28px;
-height: 28px;}
-.player-olympic-player-next 
-{width: 24px;
-height: 28px;}
-/* Display live */
-.prism-player .prism-live-display
-{font-size: 12px;
-color: #fff;
-background: #E53935;
-border-radius: 3px;
-padding: 1px 5px;
-line-height: 19px;
-text-align: left;
-margin-top: 12px}
-/* Volume */
-.prism-volume 
-{margin-top: 14px !important;
-margin-right: 12px !important;}
-.prism-player .prism-volume .volume-icon 
-{width: 27px;
-height: 26px;
-background-repeat: no-repeat;}
-.prism-player .prism-volume .volume-icon .short-horizontal 
-{width: 2px;
-height: 7px;}
-.prism-player .prism-volume .volume-icon .long-horizontal 
-{width: 2px;
-height: 13px;}
-.prism-player .prism-volume .volume-icon.mute .short-horizontal 
-{height: 13px;
-top: 7px;}
-.prism-player .prism-volume .volume-icon.mute .long-horizontal 
-{top: 7px;
-height: 13px;}
-/* Closed caption */
-.prism-player .prism-cc-btn 
-{height: 24px;
-width: 20px;
-margin-top: 14px !important;
-margin-right: 22px !important;}
-/* Setting button */
-.prism-player .prism-setting-btn 
-{width: 20px;
-height: 22px;
-margin-top: 15px !important;
-margin-right: 23px !important;}
-/* Display time */
-.prism-time-display 
-{margin-top: 4px !important;
-margin-left: 20px !important;}
-</style>
-
 </head>
 <body>
-
-<div id="player-con"></div>
-
+<div class="prism-player" id="player-con"></div>
 <script>
-// Create player
 var id = J_get('id');
 var player = new Aliplayer({
-id: "player-con",
-source: ""+ id +"",
-width: "100%",
-cover: "Image.png", // Thumbnail. Video cover.
-autoplay: true, // Autoplay video. Set to 'false' for default.
-isLive: true, // Live video. If not live changes to 'flase' for default.
-rePlay: true, // Replay video. Set to 'false' for default.
-playsinline: true, // Line bar. Set to 'false' for default.
-preload: true, // Auto reload. Set to 'false' for default.
-useH5Prism: true, // Set player for HTML5.
-language: "en-us" // Do not remove or change.
-},
-function (player) {
-console.log("The player is created");
-});
-// Remember played position for "local video" (Not for online video).
-const saveTime = function (memoryVideo,currentTime) {
-localStorage.setItem(memoryVideo, currentTime); 
-}
-const getTime = function (memoryVideo) {
-return localStorage.getItem(memoryVideo)
-}
+  "id": "player-con",
+  "source": ""+ id +"",
+  "width": "100%",
+  "height": "620px",
+  "autoplay": true,
+  "isLive": true,
+  "rePlay": false,
+  "playsinline": true,
+  "preload": true,
+  "controlBarVisibility": "hover",
+  "useH5Prism": true,
+  "language": "en-us"
+}, function (player) {
+    console.log("The player is created");
+  }
+);
 </script>
-
-<iframe height='450' src='https://www.youtube.com/live_chat?v=WgE8UmVJjoI&embed_domain=rawcdn.githack.com&dark_theme=1'width='100%'></iframe>
-
 </body>
 </html>
