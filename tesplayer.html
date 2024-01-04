@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,31 @@
 <script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/apsara-media-box/imp-web-player/2.19.0/aliplayer-min.js"></script>
 
 <title>Ali-Player</title> <!-- Only support for "https" (http not valid) -->
+
+<script type="text/javascript">
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        function dw(str) {
+            document.write(str);
+        }
+
+        function J_get(name, url) {
+            url = url ? url : self.window.document.location.href;
+            var start = url.indexOf(name + '=');
+            if (start == -1) return '';
+            var len = start + name.length + 1;
+            var end = url.indexOf('######', len);
+            if (end == -1) end = url.length;
+            return unescape(url.substring(len, end));
+        }
+        //-->
+
+        id = J_get('id');
+
+        var gid = encodeURIComponent(id);
+    </script>
 
 <style>
 /* Body style */
@@ -151,9 +177,10 @@ margin-left: 20px !important;}
 
 <script>
 // Create player
+var id = J_get('id');
 var player = new Aliplayer({
 id: "player-con",
-source: "https://bcovlive-a.akamaihd.net/r2d2c4ca5bf57456fb1d16255c1a535c8/eu-west-1/6058004203001/playlist.m3u8",
+source: "+ id +",
 width: "100%",
 cover: "Image.png", // Thumbnail. Video cover.
 autoplay: true, // Autoplay video. Set to 'false' for default.
