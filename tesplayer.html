@@ -1,14 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="IE=edge" >
-<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
-<title>Aliplayer Online Settings</title>
-<link rel="stylesheet" href="https://g.alicdn.com/apsara-media-box/imp-web-player/2.19.0/skins/default/aliplayer-min.css" />
-<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/apsara-media-box/imp-web-player/2.19.0/aliplayer-min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaka Player HLS with Referer Checking</title>
 
-<script type="text/javascript">
+    <!-- Shaka Player CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/shaka-player@4.7.1/dist/controls.css" />
+
+    <!-- Shaka Player JavaScript -->
+    <script src="https://unpkg.com/shaka-player@4.7.1/dist/shaka-player.compiled.js"></script>
+    <style>
+        /* Membuat video player responsif menggunakan media queries */
+        #shaka-player-container {
+            width: 100%;
+            height: 100%;
+            max-width: 800px; /* Ukuran maksimal untuk konten */
+            margin: 0 auto; /* Pusatkan konten di tengah */
+        }
+
+        #quality-select {
+            margin-top: 10px;
+            max-width: 300px; /* Lebar maksimal untuk elemen pilihan kualitas */
+        }
+    </style>
+    
+    <script type="text/javascript">
         function $(id) {
             return document.getElementById(id);
         }
@@ -17,14 +34,14 @@
             document.write(str);
         }
 
-        function J_get(name, source) {
-            source = source ? source : self.window.document.location.href;
-            var start = source.indexOf(name + '=');
+        function J_get(name, manifestUri) {
+            manifestUri = manifestUri ? manifestUri : self.window.document.location.href;
+            var start = manifestUri.indexOf(name + '=');
             if (start == -1) return '';
             var len = start + name.length + 1;
-            var end = source.indexOf('######', len);
-            if (end == -1) end = source.length;
-            return unescape(source.substring(len, end));
+            var end = manifestUri.indexOf('######', len);
+            if (end == -1) end = manifestUri.length;
+            return unescape(manifestUri.substring(len, end));
         }
         //-->
 
@@ -32,29 +49,46 @@
 
         var gid = encodeURIComponent(id);
     </script>
-
+    
 </head>
 <body>
-<div class="prism-player" id="player-con"></div>
-<script>
-var id = J_get('id');
-var player = new Aliplayer({
-  "id": "player-con",
-  "source": ""+ id +"",
-  "width": "100%",
-  "height": "620px",
-  "autoplay": true,
-  "isLive": true,
-  "rePlay": false,
-  "playsinline": true,
-  "preload": true,
-  "controlBarVisibility": "hover",
-  "useH5Prism": true,
-  "language": "en-us"
-}, function (player) {
-    console.log("The player is created");
-  }
-);
-</script>
+
+    <!-- Container untuk pemutar Shaka Player -->
+    <video id="shaka-player-container" controls></video>
+
+    <script>
+        var id = J_get('id');
+        // Membuat instance Shaka Player
+        var videoElement = document.getElementById('shaka-player-container');
+        var player = new shaka.Player(videoElement);
+
+        // Mendefinisikan URL video HLS
+        var manifestUri = ""+ id +""; // Ganti dengan URL video HLS Anda
+
+        // Memeriksa header referer sebelum memuat video
+        var referer = document.referrer;
+        if (isValidReferer(referer)) {
+            // Memuat dan memainkan video dengan autoplay
+            player.load(manifestUri, /* autoplay */ true).then(function() {
+                console.log('Video berhasil dimuat!');
+            }).catch(onError);
+        } else {
+            console.error('Referer tidak valid. Akses ditolak.');
+        }
+
+        // Fungsi untuk memeriksa apakah referer valid
+        function isValidReferer(referer) {
+            // Ganti dengan logika validasi referer Anda
+            // Misalnya, Anda dapat memeriksa apakah referer sesuai dengan domain yang diizinkan
+            // Contoh sederhana: return referer.includes('example.com');
+            return true;
+        }
+
+        // Menangani kesalahan
+        function onError(event) {
+            console.error('Error code', event.detail.code, 'object', event.detail.data);
+        }
+    </script>
+
 </body>
 </html>
