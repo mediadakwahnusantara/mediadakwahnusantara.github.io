@@ -1,121 +1,70 @@
-<!DOCTYPE html>
 <html>
-
 <head>
-    <meta name="referrer" content="same-origin">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="stylesheet" type="text/css" href="https://cdn.bitmovin.com/player/web/8/bitmovinplayer-ui.css" />
-    <script type="text/javascript" src="https://cdn.bitmovin.com/player/web/8/bitmovinplayer.js"></script>
-    <script src="https://cdn.bitmovin.com/player/web/8/bitmovinplayer-ui.js"></script>
-    <style>
-        .bitmovinplayer-ad-container,
-        .bitmovinplayer-container {
-            direction: ltr;
-        }
+<meta charset="utf-8">
+<meta name="robots" content="noindex" />
+<style type="text/css">
 
-        .bmpui-ui-watermark,
-        #bmpui-id-184,
-        #bmpui-id-132 {
-            display: none;
-            !important
-        }
-
-        #bmpui-id-185 {
-            margin: 9px 20px 0 10px
-        }
-
-        .bmpui-ui-buffering-overlay {
-            background-color: #000000b3
-        }
-
-        .notloaded .bmpui-ui-buffering-overlay-indicator {
-            display: inline-block !important
-        }
-
-        #playerdiv .bmpui-ui-buffering-overlay .bmpui-ui-buffering-overlay-indicator {
-            background: #fff;
-            height: 1em;
-            margin: .5em;
-            width: 1em;
-            border-radius: 10px
-    </style>
-
-    <script type="text/javascript">
-        function $(id) {
-            return document.getElementById(id);
-        }
-
-        function dw(str) {
-            document.write(str);
-        }
-
-        function J_get(name, url) {
-            url = url ? url : self.window.document.location.href;
-            var start = url.indexOf(name + '=');
-            if (start == -1) return '';
-            var len = start + name.length + 1;
-            var end = url.indexOf('######', len);
-            if (end == -1) end = url.length;
-            return unescape(url.substring(len, end));
-        }
-        //-->
-
-        id = J_get('id');
-
-        var gid = encodeURIComponent(id);
-    </script>
-
+body {
+   margin: 0;
+   padding: 0;
+}
+</style>
 </head>
 
-<body>
+<link href="https://rawcdn.githack.com/mediadakwahnusantara/mediadakwahnusantara.github.io/c7af8575010d897098db9d2d09e7be57bff6306a/skin.css" rel="stylesheet" type="text/css">    
+<script type="text/javascript">
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+	var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+	results = regex.exec(location.search);
+	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
-    <div id="my-player"></div>
-    <script type="text/javascript">
-        var id = J_get('id');
+var getURL = getParameterByName('get');
+var getIMG = getParameterByName('img');
+var getKEY  = getParameterByName('key');
+var getKEY2  = getParameterByName('key2');
+if (getURL == "#") {alert('Vuelve a la página anterior');}
+</script>
+<script src='https://content.jwplatform.com/libraries/KB5zFt7A.js'></script>
 
-        function override(url) {
-            if (url.indexOf("licensing.bitmovin.com/licensing") > -1) return "data:text/plain;charset=utf-8;base64,eyJzdGF0dXMiOiJncmFudGVkIiwibWVzc2FnZSI6IlRoZXJlIHlvdSBnby4ifQ==";
-            if (url.indexOf("licensing.bitmovin.com/impression") > -1) return "data:text/plain;charset=utf-8;base64,eyJzdGF0dXMiOiJncmFudGVkIiwibWVzc2FnZSI6IlRoZXJlIHlvdSBnby4ifQ==";
-            return url;
+<div id="player"></div>
+<script type="text/javascript">
+var playerInstance=jwplayer("player");
+
+playerInstance.setup({
+
+    playlist: [{
+    "title": "",
+    "description": "",
+    "image": getIMG,
+      "sources": [
+        {
+          "default": false,
+          "type": "dash,hls",
+          "file": getURL,
+          "drm": {
+            "clearkey": {"keyId": getKEY, "key": getKEY2}
+          },
+          "label": "0"
         }
-        var opens = XMLHttpRequest.prototype.open;
-        XMLHttpRequest.prototype.open = function() {
-            var url = override(arguments[1]);
-            arguments[1] = url;
-            return opens.apply(this, arguments);
-        }
-        const container = document.getElementById('my-player');
-        const source = {
-            //"dash": "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd",
-            "hls": "" + id + "",
-            // "smooth": "https://test.playready.microsoft.com/smoothstreaming/SSWSS720H264/SuperSpeedway_720.ism/manifest",
-            //"progressive": "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/MI201109210084_mpeg-4_hd_high_1080p25_10mbits.mp4",
-            //"poster": "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/poster.jpg",
-        };
-        const playerConfig = {
-            key: '11d3698c-efdf-42f1-8769-54663995de2b',
-            playback: {
-                autoplay: true,
-                muted: false,
-                cast: true,
-                ui: true,
-            }
-        };
-        const player = new bitmovin.player.Player(container, playerConfig);
-        player.load(source).then(
-            player => {
-                console.log('Successfully created Bitmovin Player instance')
-            },
-            reason => {
-                console.log('Error while creating Bitmovin Player instance')
-            }
-        );
-    </script>
+      ]
+    }],
+    width: "100%",
+    height: "100%",
+    aspectratio: "16:9",
+    autostart: false,
+    cast: {},
+    sharing: {}
+});
+</script>
 
-<script type="text/javascript">document.write('\u003c\u0073\u0063\u0072\u0069\u0070\u0074\u0020\u0074\u0079\u0070\u0065\u003d\u0027\u0074\u0065\u0078\u0074\u002f\u006a\u0061\u0076\u0061\u0073\u0063\u0072\u0069\u0070\u0074\u0027\u003e\u000a\u0065\u0076\u0061\u006c\u0028\u0066\u0075\u006e\u0063\u0074\u0069\u006f\u006e\u0028\u0070\u002c\u0061\u002c\u0063\u002c\u006b\u002c\u0065\u002c\u0064\u0029\u007b\u0065\u003d\u0066\u0075\u006e\u0063\u0074\u0069\u006f\u006e\u0028\u0063\u0029\u007b\u000a\u0072\u0065\u0074\u0075\u0072\u006e\u0020\u0063\u002e\u0074\u006f\u0053\u0074\u0072\u0069\u006e\u0067\u0028\u0033\u0036\u0029\u007d\u003b\u0069\u0066\u0028\u0021\u0027\u0027\u002e\u0072\u0065\u0070\u006c\u0061\u0063\u0065\u0028\u002f\u005e\u002f\u002c\u0053\u0074\u0072\u0069\u006e\u0067\u0029\u0029\u007b\u0077\u0068\u0069\u006c\u0065\u0028\u0063\u002d\u002d\u0029\u007b\u0064\u005b\u0063\u002e\u0074\u006f\u0053\u0074\u0072\u0069\u006e\u0067\u0028\u0061\u0029\u005d\u003d\u006b\u005b\u0063\u005d\u007c\u007c\u0063\u002e\u0074\u006f\u0053\u0074\u0072\u0069\u006e\u0067\u0028\u0061\u0029\u007d\u006b\u003d\u005b\u0066\u0075\u006e\u0063\u0074\u0069\u006f\u006e\u0028\u0065\u0029\u007b\u0072\u0065\u0074\u0075\u0072\u006e\u0020\u0064\u005b\u0065\u005d\u007d\u005d\u003b\u0065\u003d\u0066\u0075\u006e\u0063\u0074\u0069\u006f\u006e\u0028\u0029\u007b\u0072\u0065\u0074\u0075\u0072\u006e\u0027\u005c\u005c\u0077\u002b\u0027\u007d\u003b\u0063\u003d\u0031\u007d\u003b\u0077\u0068\u0069\u006c\u0065\u0028\u0063\u002d\u002d\u0029\u007b\u0069\u0066\u0028\u006b\u005b\u0063\u005d\u0029\u007b\u0070\u003d\u0070\u002e\u0072\u0065\u0070\u006c\u0061\u0063\u0065\u0028\u006e\u0065\u0077\u0020\u0052\u0065\u0067\u0045\u0078\u0070\u0028\u0027\u005c\u005c\u0062\u0027\u002b\u0065\u0028\u0063\u0029\u002b\u0027\u005c\u005c\u0062\u0027\u002c\u0027\u0067\u0027\u0029\u002c\u006b\u005b\u0063\u005d\u0029\u007d\u007d\u0072\u0065\u0074\u0075\u0072\u006e\u0020\u0070\u007d\u0028\u0027\u0028\u0033\u0028\u0029\u007b\u0028\u0033\u0020\u0061\u0028\u0029\u007b\u0038\u007b\u0028\u0033\u0020\u0062\u0028\u0032\u0029\u007b\u0037\u0028\u0028\u005c\u0027\u005c\u0027\u002b\u0028\u0032\u002f\u0032\u0029\u0029\u002e\u0036\u0021\u003d\u003d\u0031\u007c\u007c\u0032\u0025\u0035\u003d\u003d\u003d\u0030\u0029\u007b\u0028\u0033\u0028\u0029\u007b\u007d\u0029\u002e\u0039\u0028\u005c\u0027\u0034\u005c\u0027\u0029\u0028\u0029\u007d\u0063\u007b\u0034\u007d\u0062\u0028\u002b\u002b\u0032\u0029\u007d\u0029\u0028\u0030\u0029\u007d\u0064\u0028\u0065\u0029\u007b\u0067\u0028\u0061\u002c\u0066\u0029\u007d\u007d\u0029\u0028\u0029\u007d\u0029\u0028\u0029\u003b\u0027\u002c\u0031\u0037\u002c\u0031\u0037\u002c\u0027\u007c\u007c\u0069\u007c\u0066\u0075\u006e\u0063\u0074\u0069\u006f\u006e\u007c\u0064\u0065\u0062\u0075\u0067\u0067\u0065\u0072\u007c\u0032\u0030\u007c\u006c\u0065\u006e\u0067\u0074\u0068\u007c\u0069\u0066\u007c\u0074\u0072\u0079\u007c\u0063\u006f\u006e\u0073\u0074\u0072\u0075\u0063\u0074\u006f\u0072\u007c\u007c\u007c\u0065\u006c\u0073\u0065\u007c\u0063\u0061\u0074\u0063\u0068\u007c\u007c\u0035\u0030\u0030\u0030\u007c\u0073\u0065\u0074\u0054\u0069\u006d\u0065\u006f\u0075\u0074\u0027\u002e\u0073\u0070\u006c\u0069\u0074\u0028\u0027\u007c\u0027\u0029\u002c\u0030\u002c\u007b\u007d\u0029\u0029\u000a\u003c\u002f\u0073\u0063\u0072\u0069\u0070\u0074\u003e\u000a\u003c\u0073\u0063\u0072\u0069\u0070\u0074\u0020\u0064\u0069\u0073\u0061\u0062\u006c\u0065\u002d\u0064\u0065\u0076\u0074\u006f\u006f\u006c\u002d\u0061\u0075\u0074\u006f\u003d\u0027\u0027\u0020\u0073\u0072\u0063\u003d\u0027\u0068\u0074\u0074\u0070\u0073\u003a\u002f\u002f\u0063\u0064\u006e\u002e\u006a\u0073\u0064\u0065\u006c\u0069\u0076\u0072\u002e\u006e\u0065\u0074\u002f\u006e\u0070\u006d\u002f\u0064\u0069\u0073\u0061\u0062\u006c\u0065\u002d\u0064\u0065\u0076\u0074\u006f\u006f\u006c\u0040\u006c\u0061\u0074\u0065\u0073\u0074\u0027\u003e\u003c\u002f\u0073\u0063\u0072\u0069\u0070\u0074\u003e');</script>
+<!-- ads-->
 
-</body>
+<!--<script type='text/javascript' src='//pl14330559.toprevenuegate.com/ac/58/bb/ac58bbe800329453de3d4b2f28050b55.js'></script>-->
+
+<!-- ads-->
+
+
 
 </html>
